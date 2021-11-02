@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand mr-2">Datting App</a>
+      <a class="navbar-brand mr-2" routerLink="/">Dating App</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -14,32 +14,52 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul
-          class="navbar-nav me-auto mb-2 mb-md-0"
-          *ngIf="accountService.currentUser$ | async"
-        >
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Matches</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Lists</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Messages</a>
-          </li>
-        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <ng-container *ngIf="accountService.currentUser$ | async">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                aria-current="page"
+                routerLink="/members"
+                routerLinkActive="active"
+                >Matches</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lists" routerLinkActive="active"
+                >Lists</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/messages"
+                routerLinkActive="active"
+                >Messages</a
+              >
+            </li>
+            <li>
+              <a
+                class="nav-link"
+                routerLink="/members/details"
+                routerLinkActive="active"
+                >Message Detail</a
+              >
+            </li>
+          </ng-container>
+          </ul>
         <div
           class="dropdown btn-group"
           *ngIf="accountService.currentUser$ | async"
           dropdown
         >
           <button
-          class="btn btn-primary dropwdown-toggle"
-          dropdownToggle
-          aria-controls="User profile dropdown menu"
+            class="btn btn-primary dropwdown-toggle"
+            dropdownToggle
+            aria-controls="User profile dropdown menu"
           >
-          <span class="fa-caret"></span>
-          Welcome username {{model.username}}
+            <span class="fa-caret"></span>
+            Welcome username {{ model.username }}
           </button>
           <div class="dropdown-menu" *dropdownMenu>
             <a href="" class="dropdown-item">Edit Profile</a>
@@ -63,12 +83,12 @@
             aria-label="User Name"
           />
           <input
-          name="password"
-          class="form-control me-2"
-          type="password"
-          placeholder="Password"
-          [(ngModel)]="model.password"
-          aria-label="Password"
+            name="password"
+            class="form-control me-2"
+            type="password"
+            placeholder="Password"
+            [(ngModel)]="model.password"
+            aria-label="Password"
           />
           <button class="btn btn-outline-success" type="submit">Login</button>
         </form>
